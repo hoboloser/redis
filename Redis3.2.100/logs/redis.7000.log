@@ -1,0 +1,32 @@
+[65364] 27 May 16:03:28.342 # 
+*** FATAL CONFIG FILE ERROR ***
+
+[65364] 27 May 16:03:28.343 # Reading the configuration file, at line 584
+
+[65364] 27 May 16:03:28.343 # >>> 'appendfilename "appendaof/appendonly.7000.aof"'
+
+[65364] 27 May 16:03:28.343 # appendfilename can't be a path, just a filename
+
+[31100] 27 May 16:03:44.381 # HandleServiceCommands: system error caught. error code=1073, message = CreateService failed: unknown error
+
+[27760] 27 May 16:03:48.493 # 
+*** FATAL CONFIG FILE ERROR ***
+
+[27760] 27 May 16:03:48.494 # Reading the configuration file, at line 584
+
+[27760] 27 May 16:03:48.494 # >>> 'appendfilename "appendaof/appendonly.7000.aof"'
+
+[27760] 27 May 16:03:48.495 # appendfilename can't be a path, just a filename
+
+[52288] 27 May 16:05:47.297 # HandleServiceCommands: system error caught. error code=1073, message = CreateService failed: unknown error
+
+[12012] 27 May 16:05:51.647 # 
+*** FATAL CONFIG FILE ERROR ***
+
+[12012] 27 May 16:05:51.647 # Reading the configuration file, at line 584
+
+[12012] 27 May 16:05:51.648 # >>> 'appendfilename "appendaof/appendonly.7000.aof"'
+
+[12012] 27 May 16:05:51.648 # appendfilename can't be a path, just a filename
+
+[56024] 27 May 16:06:44.917 # Creating Server TCP listening socket 127.0.0.1:7000: bind: No error
