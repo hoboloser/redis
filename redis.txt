@@ -1,0 +1,100 @@
+Redis下载地址：
+	https://github.com/MSOpenTech/redis
+Redis 集群创建
+	redis 服务器不配置密码
+版本
+	redis:3.2.100
+	ruby:2.2.4
+	rubygames:3.2.2
+
+redis conf 配置：
+
+port 7000
+bind 127.0.0.1
+loglevel notice
+logfile "F:/Redis/Redis3.2.100/logs/redis7000.log"
+appendonly yes
+appendfilename "appendonly.7000.aof"
+cluster-enabled yes
+cluster-config-file nodes.7000.conf
+cluster-node-timeout 15000
+cluster-slave-validity-factor 10
+cluster-migration-barrier 1
+cluster-require-full-coverage yes
+
+
+cd ruby/bin 目录
+安装rubygames驱动
+gem install --local path_to_gem/filename.gem  
+
+gem install redis
+
+下载Redis官方提供的创建Redis集群的ruby脚本文件redis-trib.rb
+https://raw.githubusercontent.com/MSOpenTech/redis/3.0/src/redis-trib.rb
+
+创建Redis群
+redis-trib.rb create --replicas 0 127.0.0.1:7006 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005
+
+
+效验是否创建成功
+redis-trib.rb check 127.0.0.1:7001
+
+使用redis客户端redis-cli.exe查看数据记录数，以及集群相关信息
+redis-cli.exe -c -p 6380
+  -c 表示 cluster
+  -p 表示 port 端口号
+  
+输入dbsize查询 记录总数
+dbsize
+
+输入cluster info可以从客户端的查看集群的信息：
+cluster info
+
+
+
+Redis 主从同步
+ redis 服务器需配置密码
+
+master 服务器
+	redis confg 配置：
+	port 6380
+	bind 127.0.0.1
+	loglevel notice
+	logfile "F:/Redis/Redis3.2.100/logs/redis.6380.log"
+	appendonly yes
+	appendfilename "appendonly.6380.aof"
+	
+slave 服务器
+	port 6381
+	bind 127.0.0.1
+	loglevel notice
+	logfile "F:/Redis/Redis3.2.100/logs/redis.6381.log"
+	appendonly yes
+	appendfilename "appendonly.6381.aof"
+	# 从服务器
+	#master 服务器地址
+	slaveof 127.0.0.1 6380  
+	#master服务器密码
+	masterauth 123456 
+	#从服务器是否只读
+	slave-read-only yes
+	
+redis 控制台连接命令
+	redis-cli.exe -h 127.0.0.1 -p 6379
+	auth 123456
+	#查看redis服务器状态
+	info replication
+	
+sentinel 配置： 
+	redis-cli.exe -h 127.0.0.1 -p 26379
+	#查看sentinel服务器状态
+	info sentinel
+	
+	port 26379
+	dir "F:\\Redis\\Redis\xd6\xf7\xb4\xd3\xcd\xac\xb2\xbd\\redis"
+	sentinel monitor mymaster 127.0.0.1 6379 1
+	sentinel auth-pass mymaster 123456
+	sentinel down-after-milliseconds master001 30000
+	sentinel parallel-syncs master001 1
+	sentinel failover-timeout master001 180000
+
